@@ -68,4 +68,5 @@ df_audio_features.rename(columns={'id': 'track_id'}, inplace=True)
 # Merge the data frames
 df = pd.merge(df_tracks,df_audio_features,on='track_id',how='inner')
 
+# Save data to cwd
 df.to_csv('spotify_data.csv', index=False)
