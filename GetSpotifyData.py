@@ -6,7 +6,7 @@ sp = spotipy.Spotify()
 
 from spotipy.oauth2 import SpotifyClientCredentials 
 import spotipy.util as util
-# import sys
+import timeit
 
 # Set up client credentials
 cid = 'f3e33e9da81b4f8388a53b5641f2dd48'
@@ -20,14 +20,17 @@ track_name = []
 popularity = []
 track_id = []
 
+start = timeit.default_timer()
 # Iterate up to 2000 incrementing offset by 50 for each query
-for i in range(0,2000,50):
+for i in range(0,250,50):
     track_results = sp.search(q='year:2016', type='track', limit=50,offset=i)
     for i, t in enumerate(track_results['tracks']['items']):
         artist_name.append(t['artists'][0]['name'])
         track_name.append(t['name'])
         track_id.append(t['id'])
         popularity.append(t['popularity'])
+
+print("Collecting songs execution time: --- %s seconds ---" % (timeit.default_timer() - start))
 
 import pandas as pd
 
@@ -39,7 +42,6 @@ df_tracks = pd.DataFrame({  'artist_name':artist_name,
 
 # group the entries by artist_name and track_name and check for duplicates
 grouped = df_tracks.groupby(['artist_name','track_name'], as_index=True).size()
-# grouped[grouped > 1].count()
 
 # Drop any duplicates
 df_tracks[df_tracks.duplicated(subset=['artist_name','track_name'],keep=False)].count()
@@ -49,6 +51,7 @@ rows = []
 batchsize = 100
 None_counter = 0
 
+start = timeit.default_timer()
 for i in range(0,len(df_tracks['track_id']),batchsize):
     batch = df_tracks['track_id'][i:i+batchsize]
     feature_results = sp.audio_features(batch)
@@ -57,6 +60,8 @@ for i in range(0,len(df_tracks['track_id']),batchsize):
             None_counter = None_counter + 1
         else:
             rows.append(t)
+
+print("song features execution time: --- %s seconds ---" % (timeit.default_timer() - start))
 
 df_audio_features = pd.DataFrame.from_dict(rows,orient='columns')
 
