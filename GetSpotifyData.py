@@ -22,8 +22,8 @@ track_id = []
 
 start = timeit.default_timer()
 # Iterate up to 2000 incrementing offset by 50 for each query
-for i in range(0,250,50):
-    track_results = sp.search(q='year:2016', type='track', limit=50,offset=i)
+for i in range(0,2000,50):
+    track_results = sp.search(q='year:2010', type='track', limit=50,offset=i)
     for i, t in enumerate(track_results['tracks']['items']):
         artist_name.append(t['artists'][0]['name'])
         track_name.append(t['name'])
