@@ -1,5 +1,5 @@
 # Overlaps Algorithm
-Repo used to collect and investigate data that will be used to try help us build our playlist generation algorithm
+This repository is used to collect, clean, and analyze spotify data to help prep and derive paramters for our implemented algorithms. We use it to conduct extensive exploratory analysis
 
 ## Use
 To collect data use the GetSpotifyData.py file (make sure you have installed packages)
