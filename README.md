@@ -1,5 +1,7 @@
 # Overlaps Algorithm
-This repository is used to collect, clean, and analyze spotify data to help prep and derive paramters for our implemented algorithms. We use it to conduct extensive exploratory analysis
+This repository is used to collect, clean, and analyze spotify data to help prep and derive paramters for our implemented algorithms. We use it to conduct extensive exploratory analysis.
+
+TODO: CLEAN UP THIS REPO
 
 ## Use
 To collect data use the GetSpotifyData.py file (make sure you have installed packages)
