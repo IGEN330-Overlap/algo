@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-
 # SET PLOT PARAMETERS and other
 sns.set()
 
@@ -17,7 +16,6 @@ sns.set(rc={'figure.figsize': (14, 8),
             })
 
 pd.options.display.max_columns = None
-
 
 # ----- Import Data ----- #
 def loadData():
@@ -50,6 +48,7 @@ def buildAndSaveDistributionPlot(attribute):
     if type(attribute) != str:
         return "bad attribute sent"
 
+    # note that distplot is being deprecated so maybe switch to displot if find the time
     x = sns.distplot(df[attribute], hist=True, bins=int(50/5), color='#e5e8ee', hist_kws={'edgecolor': '#4747fc', 'linewidth': 2},
                      kde=True, kde_kws={'linewidth': 4, "color": "#4747fc"})
 
